@@ -2,14 +2,16 @@ import hexutil
 import board
 import neopixel
 
+max_x = 11
+max_y = 12
 
 pixels = neopixel.NeoPixel(board.D18, 132)
 
-def ledIndexFromOffsetCoordinates(i,j):
-	if i % 2 == 0:
-		return i * max_cols + j
+def ledIndexFromOffsetCoordinates(x,y):
+	if y % 2 == 0:
+		return y * max_x + x
 	else :
-		return (i + 1) * max_cols - (j + 1) 
+		return (y + 1) * max_x - (x + 1) 
 
 def offsetCoordinateFromDouble(hex):
 
@@ -18,35 +20,24 @@ def offsetCoordinateFromDouble(hex):
     else :
         return [hex.x,(hex.y+1)/2]
 
-max_rows = 12
-max_cols = 11
-
 # Master Grid that will holds all Hexes using offset coordinate system. I Rows, J Columns
 grid = {} 
-
-for i in range(0,12) : 
-	row = {}
-	for j in range(0,11) :
-		if i % 2 == 0 :
-			# print (i)
-			# print (j*2)
-			# print ("\n")
-			newhex = hexutil.Hex(j*2,i)
+for x in range(0, max_x) :
+	for y in range(0, max_y) : 
+		col = {}
+	
+		if y % 2 == 0 :
+			newhex = hexutil.Hex(x*2, y)
 		else :
-			# print (i)
-			# print ((j*2)-1)
-			# print ("\n")
-			newhex = hexutil.Hex((j*2)-1,i)
-		newhex.led = ledIndexFromOffsetCoordinates(i,j)
-		row[j] = newhex
-		grid[i] = row
-
-#print(grid[1][3].led)
+			newhex = hexutil.Hex((x*2)-1, y)
+		newhex.led = ledIndexFromOffsetCoordinates(x, y)
+		col[y] = newhex
+	grid[x] = col
 
 pixels[grid[1][3].led] = (255, 0, 0)
 for h in grid[1][3].neighbours() :
-    i,j = offsetCoordinateFromDouble(h)
-    pixels[grid[i][j].led] =  (0, 255, 0)
+    x,y = offsetCoordinateFromDouble(h)
+    pixels[grid[x][y].led] =  (0, 255, 0)
 
 
 # Filters real physical hexes from hex coordinate space.
