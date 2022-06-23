@@ -41,7 +41,7 @@ def isOnBoard (x,y) :
 def neighboursOnBoard(hex) :
 	actualNeighbours = []
 	for neighbour in hex.neighbours() :
-		if isOnBoard(hex.x,hex.y) :
+		if isOnBoard(neighbour.x,neighbour.y) :
 			actualNeighbours.append(neighbour)
 	return actualNeighbours
 
