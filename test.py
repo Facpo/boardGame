@@ -54,7 +54,7 @@ for x in range(0, max_x) :
 print(grid)
 
 pixels[grid[0][3].led] = (255, 0, 0)
-for h in grid[0][3].neighbours() :
+for h in grid[0][3].neighboursOnBoard() :
     x,y = offsetCoordinateFromDouble(h)
     pixels[grid[x][y].led] =  (0, 255, 0)
 
