@@ -25,9 +25,9 @@ def offsetCoordinateFromDouble(hex):
 
 # Filters real physical hexes from hex coordinate space.
 def isOnBoard (x,y) :
-	if x > max_x :
+	if x >= max_x :
 		return False
-	if y > max_y :
+	if y >= max_y :
 		return False
 	if y < 0 :
 		return False
@@ -60,9 +60,9 @@ for x in range(0, max_x) :
 	grid[x] = col
 
 # print(grid)
-print(neighboursOnBoard(grid[0][3]))
-pixels[grid[0][3].led] = (255, 0, 0)
-for h in neighboursOnBoard(grid[0][3]) :
+print(neighboursOnBoard(grid[0][11]))
+pixels[grid[0][11].led] = (255, 0, 0)
+for h in neighboursOnBoard(grid[0][11]) :
     x,y = offsetCoordinateFromDouble(h)
     pixels[grid[x][y].led] =  (0, 255, 0)
 
