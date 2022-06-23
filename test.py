@@ -23,7 +23,7 @@ def offsetCoordinateFromDouble(hex):
     else :
         return [(hex.x+1)/2,hex.y]
 
-# Filters real physical hexes from hex coordinate space.
+# Filters offset coordinates that are off board
 def isOnBoard (x,y) :
 	if x >= max_x :
 		return False
@@ -41,7 +41,8 @@ def isOnBoard (x,y) :
 def neighboursOnBoard(hex) :
 	actualNeighbours = []
 	for neighbour in hex.neighbours() :
-		if isOnBoard(neighbour.x,neighbour.y) :
+		offsetX,offsetY = offsetCoordinateFromDouble(neighbour)
+		if isOnBoard(offsetX,offsetY) :
 			actualNeighbours.append(neighbour)
 	return actualNeighbours
 
