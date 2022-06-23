@@ -23,9 +23,8 @@ def offsetCoordinateFromDouble(hex):
 # Master Grid that will holds all Hexes using offset coordinate system. I Rows, J Columns
 grid = {} 
 for x in range(0, max_x) :
-	for y in range(0, max_y) : 
-		col = {}
-	
+	col = {}
+	for y in range(0, max_y) : 	
 		if y % 2 == 0 :
 			newhex = hexutil.Hex(x*2, y)
 		else :
@@ -33,6 +32,8 @@ for x in range(0, max_x) :
 		newhex.led = ledIndexFromOffsetCoordinates(x, y)
 		col[y] = newhex
 	grid[x] = col
+
+print(grid)
 
 pixels[grid[1][3].led] = (255, 0, 0)
 for h in grid[1][3].neighbours() :
