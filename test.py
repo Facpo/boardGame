@@ -42,7 +42,7 @@ def neighboursOnBoard(hex) :
 	actualNeighbours = []
 	for neighbour in hex.neighbours() :
 		if isOnBoard(hex.x,hex.y) :
-			actualNeighbours.append(hex)
+			actualNeighbours.append(neighbour)
 	return actualNeighbours
 
 
@@ -59,8 +59,8 @@ for x in range(0, max_x) :
 		col[y] = newhex
 	grid[x] = col
 
-print(grid)
-
+# print(grid)
+print(neighboursOnBoard(grid[0][3]))
 pixels[grid[0][3].led] = (255, 0, 0)
 for h in neighboursOnBoard(grid[0][3]) :
     x,y = offsetCoordinateFromDouble(h)
