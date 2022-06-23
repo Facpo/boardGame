@@ -60,9 +60,9 @@ for x in range(0, max_x) :
 	grid[x] = col
 
 # print(grid)
-print(neighboursOnBoard(grid[0][11]))
-pixels[grid[0][11].led] = (255, 0, 0)
-for h in neighboursOnBoard(grid[0][11]) :
+# print(neighboursOnBoard(grid[10][11]))
+pixels[grid[10][11].led] = (255, 0, 0)
+for h in neighboursOnBoard(grid[10][11]) :
     x,y = offsetCoordinateFromDouble(h)
     pixels[grid[x][y].led] =  (0, 255, 0)
 
