@@ -26,17 +26,17 @@ def offsetCoordinateFromDouble(hex):
 # Filters real physical hexes from hex coordinate space.
 def isOnBoard (x,y) :
 	if x > max_x :
-		return false
+		return False
 	if y > max_y :
-		return false
+		return False
 	if y < 0 :
-		return false
+		return False
 	if y % 2 == 0 and x < 0 :
-		return false
+		return False
 	if y % 2 == 1 and x < -1 :
-		return false
+		return False
 		
-	return true
+	return True
 
 def neighboursOnBoard(hex) :
 	actualNeighbours = []
