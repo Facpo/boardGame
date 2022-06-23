@@ -16,9 +16,9 @@ def ledIndexFromOffsetCoordinates(x,y):
 def offsetCoordinateFromDouble(hex):
 
     if hex.y % 2 == 0 :
-        return [hex.x,hex.y/2]
+        return [hex.x/2,hex.y]
     else :
-        return [hex.x,(hex.y+1)/2]
+        return [(hex.x+1)/2,hex.y]
 
 # Master Grid that will holds all Hexes using offset coordinate system. I Rows, J Columns
 grid = {} 
