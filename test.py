@@ -38,6 +38,14 @@ def isOnBoard (x,y) :
 		
 	return true
 
+def neighboursOnBoard(hex) :
+	actualNeighbours = []
+	for neighbour in hex.neighbours() :
+		if isOnBoard(hex.x,hex.y) :
+			actualNeighbours.append(hex)
+	return actualNeighbours
+
+
 # Master Grid that will holds all Hexes using offset coordinate system. I Rows, J Columns
 grid = {} 
 for x in range(0, max_x) :
@@ -54,17 +62,11 @@ for x in range(0, max_x) :
 print(grid)
 
 pixels[grid[0][3].led] = (255, 0, 0)
-for h in grid[0][3].neighboursOnBoard() :
+for h in neighboursOnBoard(grid[0][3]) :
     x,y = offsetCoordinateFromDouble(h)
     pixels[grid[x][y].led] =  (0, 255, 0)
 
 
-def neighboursOnBoard(hex) :
-	actualNeighbours = []
-	for neighbour in hex.neighbours() :
-		if isOnBoard(hex.x,hex.y) :
-			actualNeighbours.append(hex)
-	return actualNeighbours
 
 # Return existing neighbours 
 #generateSpawnRegion (Hex)
