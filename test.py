@@ -62,8 +62,8 @@ for x in range(0, max_x) :
 
 # print(grid)
 # print(neighboursOnBoard(grid[10][11]))
-pixels[grid[10][11].led] = (255, 0, 0)
-for h in neighboursOnBoard(grid[10][11]) :
+pixels[grid[10][0].led] = (255, 0, 0)
+for h in neighboursOnBoard(grid[10][0]) :
     x,y = offsetCoordinateFromDouble(h)
     pixels[grid[x][y].led] =  (0, 255, 0)
 
