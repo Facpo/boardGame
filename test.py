@@ -107,7 +107,7 @@ for hex in generateSpawnRegion() :
 
 	x,y = offsetCoordinateFromDouble(hex)
 	
-	pixels[ledIndexFromOffsetCoordinates(x,y)] = (0, 255, 0):
+	pixels[ledIndexFromOffsetCoordinates(x,y)] = (0, 255, 0)
 
 
 
