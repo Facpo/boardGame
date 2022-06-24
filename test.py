@@ -20,9 +20,9 @@ def ledIndexFromOffsetCoordinates(x, y) :
 def offsetCoordinateFromDouble(hex) :
 
     if hex.y % 2 == 0 :
-        return [hex.x/2,hex.y]
+        return [hex.x//2,hex.y]
     else :
-        return [(hex.x+1)/2,hex.y]
+        return [(hex.x+1)//2,hex.y]
 
 def doubleCoordinateFromOffset(x,y) :
 
@@ -107,7 +107,5 @@ for x in range(0, max_x) :
 for hex in generateSpawnRegion() :
 
 	x,y = offsetCoordinateFromDouble(hex)
-	print(x)
-	print(y)
 	print(ledIndexFromOffsetCoordinates(x, y))
 	pixels[ledIndexFromOffsetCoordinates(x, y)] = (0, 255, 0)
