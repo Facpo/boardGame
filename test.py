@@ -72,7 +72,7 @@ def generateSpawnRegion () :
 
 	elif sideChoice == 2 :
 	#Bottom
-		center = doubleCoordinateFromOffset(random.randrange(1, max_x - 1),max_y)
+		center = doubleCoordinateFromOffset(random.randrange(1, max_x - 1),max_y - 1)
 
 	else:
 	#Left 
