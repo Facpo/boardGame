@@ -56,7 +56,7 @@ def neighboursOnBoard(hex) :
 		if isOnBoard(offsetX,offsetY) :
 			actualNeighbours.append(neighbour)
 	return actualNeighbours
-	
+
 #chooses one of side hexes at random
 #returns it along with list of neighbours
 def generateSpawnRegion () :
@@ -76,7 +76,7 @@ def generateSpawnRegion () :
 
 	else:
 	#Left 
-		center = doubleCoordinateFromOffset(0,random.randrange(max_y - 1))
+		center = doubleCoordinateFromOffset(0, random.randrange(max_y - 1))
 
 	regionHexes = neighboursOnBoard(center)
 	regionHexes.append(center)
@@ -107,4 +107,6 @@ for hex in generateSpawnRegion() :
 
 	x,y = offsetCoordinateFromDouble(hex)
 	print(ledIndexFromOffsetCoordinates(x, y))
+	print(x)
+	print(y)
 	pixels[ledIndexFromOffsetCoordinates(x, y)] = (0, 255, 0)
