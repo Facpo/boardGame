@@ -41,11 +41,11 @@ def generateSpawnRegion () :
 	#Top
 		center = doubleCoordinateFromOffset(random.randrange(max_x - 1),0)
 
-	else if sideChoice == 1 :
+	elif sideChoice == 1 :
 	#Right
 		center = doubleCoordinateFromOffset(max_x - 1,random.randrange(1, max_y))
 
-	else if sideChoice == 2 :
+	elif sideChoice == 2 :
 	#Bottom
 		center = doubleCoordinateFromOffset(random.randrange(1, max_x - 1),max_y)
 
