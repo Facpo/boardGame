@@ -1,6 +1,7 @@
 import hexutil
 import board
 import neopixel
+import random
 
 max_x = 11
 max_y = 12
