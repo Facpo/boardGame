@@ -33,6 +33,30 @@ def doubleCoordinateFromOffset(x,y) :
 
 	return newhex
 
+# Filters offset coordinates that are off board
+def isOnBoard (x,y) :
+	if x >= max_x :
+		return False
+	if y >= max_y :
+		return False
+	if y < 0 :
+		return False
+	if y % 2 == 0 and x < 0 :
+		return False
+	if y % 2 == 1 and x < -1 :
+		return False
+		
+	return True
+
+# Return existing neighbours 
+def neighboursOnBoard(hex) :
+	actualNeighbours = []
+	for neighbour in hex.neighbours() :
+		offsetX,offsetY = offsetCoordinateFromDouble(neighbour)
+		if isOnBoard(offsetX,offsetY) :
+			actualNeighbours.append(neighbour)
+	return actualNeighbours
+	
 #chooses one of side hexes at random
 #returns it along with list of neighbours
 def generateSpawnRegion () :
@@ -57,31 +81,6 @@ def generateSpawnRegion () :
 	regionHexes = neighboursOnBoard(center)
 	regionHexes.append(center)
 	return regionHexes
-
-
-# Filters offset coordinates that are off board
-def isOnBoard (x,y) :
-	if x >= max_x :
-		return False
-	if y >= max_y :
-		return False
-	if y < 0 :
-		return False
-	if y % 2 == 0 and x < 0 :
-		return False
-	if y % 2 == 1 and x < -1 :
-		return False
-		
-	return True
-
-# Return existing neighbours 
-def neighboursOnBoard(hex) :
-	actualNeighbours = []
-	for neighbour in hex.neighbours() :
-		offsetX,offsetY = offsetCoordinateFromDouble(neighbour)
-		if isOnBoard(offsetX,offsetY) :
-			actualNeighbours.append(neighbour)
-	return actualNeighbours
 
 
 # Master Grid that will holds all Hexes using offset coordinate system. I Rows, J Columns
