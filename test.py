@@ -8,7 +8,7 @@ max_y = 12
 pixels = neopixel.NeoPixel(board.D18, 132)
 
 #sets led index inside grid
-def ledIndexFromOffsetCoordinates(x,y):
+def ledIndexFromOffsetCoordinates(x,y) :
 	if y % 2 == 0:
 		return y * max_x + x
 	else :
@@ -16,12 +16,47 @@ def ledIndexFromOffsetCoordinates(x,y):
 
 #convert back from double coordinate to offset
 #used to turn leds on after calling lib functions
-def offsetCoordinateFromDouble(hex):
+def offsetCoordinateFromDouble(hex) :
 
     if hex.y % 2 == 0 :
         return [hex.x/2,hex.y]
     else :
         return [(hex.x+1)/2,hex.y]
+
+def doubleCoordinateFromOffset(x,y) :
+
+	if y % 2 == 0 :
+		newhex = hexutil.Hex(x*2, y)
+	else :
+		newhex = hexutil.Hex((x*2)-1, y)
+
+	return newhex
+
+#chooses one of side hexes at random
+#returns it along with list of neighbours
+def generateSpawnRegion () :
+	sideChoice = random.randrange(4)
+	regionHexes = []
+	if sideChoice == 0 :
+	#Top
+		center = doubleCoordinateFromOffset(random.randrange(max_x - 1),0)
+
+	else if sideChoice == 1 :
+	#Right
+		center = doubleCoordinateFromOffset(max_x - 1,random.randrange(1, max_y))
+
+	else if sideChoice == 2 :
+	#Bottom
+		center = doubleCoordinateFromOffset(random.randrange(1, max_x - 1),max_y)
+
+	else:
+	#Left 
+		center = doubleCoordinateFromOffset(0,random.randrange(max_y - 1))
+
+	regionHexes = neighboursOnBoard(center)
+	regionHexes.append(center)
+	return regionHexes
+
 
 # Filters offset coordinates that are off board
 def isOnBoard (x,y) :
@@ -38,6 +73,7 @@ def isOnBoard (x,y) :
 		
 	return True
 
+# Return existing neighbours 
 def neighboursOnBoard(hex) :
 	actualNeighbours = []
 	for neighbour in hex.neighbours() :
@@ -60,17 +96,19 @@ for x in range(0, max_x) :
 		col[y] = newhex
 	grid[x] = col
 
-# print(grid)
-# print(neighboursOnBoard(grid[10][11]))
-pixels[grid[5][5].led] = (255, 0, 0)
-for h in neighboursOnBoard(grid[5][5]) :
-    x,y = offsetCoordinateFromDouble(h)
-    pixels[grid[x][y].led] =  (0, 255, 0)
 
+#TEST
+# pixels[grid[5][5].led] = (255, 0, 0)
+# for h in neighboursOnBoard(grid[5][5]) :
+#     x,y = offsetCoordinateFromDouble(h)
+#     pixels[grid[x][y].led] =  (0, 255, 0)
 
+for hex in generateSpawnRegion() :
 
-# Return existing neighbours 
-#generateSpawnRegion (Hex)
+	x,y = offsetCoordinateFromDouble(hex)
+	
+	pixels[ledIndexFromOffsetCoordinates(x,y)] = (0, 255, 0):
+
 
 
 
