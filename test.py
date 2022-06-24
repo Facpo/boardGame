@@ -9,7 +9,7 @@ max_y = 12
 pixels = neopixel.NeoPixel(board.D18, 132)
 
 #sets led index inside grid
-def ledIndexFromOffsetCoordinates(x,y) :
+def ledIndexFromOffsetCoordinates(x, y) :
 	if y % 2 == 0:
 		return y * max_x + x
 	else :
@@ -107,10 +107,7 @@ for x in range(0, max_x) :
 for hex in generateSpawnRegion() :
 
 	x,y = offsetCoordinateFromDouble(hex)
-	
-	pixels[ledIndexFromOffsetCoordinates(x,y)] = (0, 255, 0)
-
-
-
-
-
+	print(x)
+	print(y)
+	print(ledIndexFromOffsetCoordinates(x, y))
+	pixels[ledIndexFromOffsetCoordinates(x, y)] = (0, 255, 0)
