@@ -10,9 +10,6 @@ max_y = 12
 num_leds = 132
 pixels = neopixel.NeoPixel(board.D18, 132)
 
-
-
-
 #sets led index inside grid
 def ledIndexFromOffsetCoordinates(x, y) :
 	if y % 2 == 0:
@@ -91,9 +88,9 @@ def lightHexes(hexes, color) :
 
 	for hex in hexes :
 		x,y = offsetCoordinateFromDouble(hex)
-		# print(ledIndexFromOffsetCoordinates(x, y))
-		# print(x)
-		# print(y)
+		print(x)
+		print(y)
+		print(ledNumbers[x][y])
 		pixels[ledNumbers[x][y]] = color
 
 def generateLayout () :
