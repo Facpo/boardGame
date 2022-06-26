@@ -35,21 +35,34 @@ def doubleCoordinateFromOffset(x,y) :
 
 	return newhex
 
+# # Filters double coordinates that are off board
+# def isOnBoardDouble(x,y) :
+# 	if x >= max_x :
+# 		return False
+# 	if y >= max_y :
+# 		return False
+# 	if y < 0 :
+# 		return False
+# 	if y % 2 == 0 and x < 0 :
+# 		return False
+# 	if y % 2 == 1 and x < -1 :
+# 		return False
+		
+# 	return True
+
 # Filters offset coordinates that are off board
-def isOnBoard (x,y) :
+def isOnBoardOffset(x,y) :
 	if x >= max_x :
 		return False
 	if y >= max_y :
 		return False
 	if y < 0 :
 		return False
-	if y % 2 == 0 and x < 0 :
-		return False
-	if y % 2 == 1 and x < -1 :
+	if x < 0 :
 		return False
 		
 	return True
-
+	
 # Return existing neighbours 
 def neighboursOnBoard(hex) :
 	actualNeighbours = []
