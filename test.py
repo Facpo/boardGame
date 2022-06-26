@@ -96,6 +96,19 @@ for x in range(0, max_x) :
 		col[y] = newhex
 	grid[x] = col
 
+def lightHexes(hexes, color) :
+
+	for hex in hexes :
+		x,y = offsetCoordinateFromDouble(hex)
+		# print(ledIndexFromOffsetCoordinates(x, y))
+		# print(x)
+		# print(y)
+		pixels[ledIndexFromOffsetCoordinates(x, y)] = color
+
+def generateLayout () :
+	#light up spawn region
+	lightHexes(generateSpawnRegion(), (0, 255, 0)) :
+
 
 #TEST
 # pixels[grid[5][5].led] = (255, 0, 0)
@@ -103,10 +116,4 @@ for x in range(0, max_x) :
 #     x,y = offsetCoordinateFromDouble(h)
 #     pixels[grid[x][y].led] =  (0, 255, 0)
 
-for hex in generateSpawnRegion() :
-
-	x,y = offsetCoordinateFromDouble(hex)
-	print(ledIndexFromOffsetCoordinates(x, y))
-	print(x)
-	print(y)
-	pixels[ledIndexFromOffsetCoordinates(x, y)] = (0, 255, 0)
+generateLayout()
