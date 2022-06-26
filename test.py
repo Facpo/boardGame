@@ -2,6 +2,8 @@ import hexutil
 import board
 import neopixel
 import random
+import digitalio
+import time
 
 max_x = 11
 max_y = 12
@@ -82,6 +84,23 @@ def generateSpawnRegion () :
 	regionHexes.append(center)
 	return regionHexes
 
+def lightHexes(hexes, color) :
+
+	for hex in hexes :
+		x,y = offsetCoordinateFromDouble(hex)
+		# print(ledIndexFromOffsetCoordinates(x, y))
+		# print(x)
+		# print(y)
+		pixels[ledIndexFromOffsetCoordinates(x, y)] = color
+
+def generateLayout () :
+	#light up spawn region
+	lightHexes(generateSpawnRegion(), (0, 255, 0))
+
+#setup button for starting map gen
+button = digitalio.DigitalInOut(board.D24)
+button.direction = digitalio.Direction.INPUT
+button.pull = digitalio.Pull.UP
 
 # Master Grid that will holds all Hexes using offset coordinate system. I Rows, J Columns
 grid = {} 
@@ -96,24 +115,13 @@ for x in range(0, max_x) :
 		col[y] = newhex
 	grid[x] = col
 
-def lightHexes(hexes, color) :
-
-	for hex in hexes :
-		x,y = offsetCoordinateFromDouble(hex)
-		# print(ledIndexFromOffsetCoordinates(x, y))
-		# print(x)
-		# print(y)
-		pixels[ledIndexFromOffsetCoordinates(x, y)] = color
-
-def generateLayout () :
-	#light up spawn region
-	lightHexes(generateSpawnRegion(), (0, 255, 0))
-
-
 #TEST
 # pixels[grid[5][5].led] = (255, 0, 0)
 # for h in neighboursOnBoard(grid[5][5]) :
 #     x,y = offsetCoordinateFromDouble(h)
 #     pixels[grid[x][y].led] =  (0, 255, 0)
 
-generateLayout()
+while (True) :
+	if (not button.value) :
+		generateLayout()
+		time.sleep(1)
