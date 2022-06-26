@@ -68,7 +68,7 @@ def neighboursOnBoard(hex) :
 	actualNeighbours = []
 	for neighbour in hex.neighbours() :
 		offsetX,offsetY = offsetCoordinateFromDouble(neighbour)
-		if isOnBoard(offsetX,offsetY) :
+		if isOnBoardOffset(offsetX,offsetY) :
 			actualNeighbours.append(neighbour)
 	return actualNeighbours
 
