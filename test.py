@@ -107,7 +107,7 @@ def lightHexes(hexes, color) :
 
 def generateLayout () :
 	#light up spawn region
-	lightHexes(generateSpawnRegion(), (0, 255, 0)) :
+	lightHexes(generateSpawnRegion(), (0, 255, 0))
 
 
 #TEST
