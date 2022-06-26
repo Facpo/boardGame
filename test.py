@@ -8,8 +8,10 @@ import time
 max_x = 11
 max_y = 12
 num_leds = 132
-
 pixels = neopixel.NeoPixel(board.D18, 132)
+
+
+
 
 #sets led index inside grid
 def ledIndexFromOffsetCoordinates(x, y) :
@@ -108,17 +110,30 @@ def wipeBoard() :
 		pixels[i] = (0, 0, 0)
 
 # Master Grid that will holds all Hexes using offset coordinate system. I Rows, J Columns
-grid = {} 
+grid = []
+ledNumbers = []
+occupiedHexes = []
 for x in range(0, max_x) :
-	col = {}
+	col_hexes = []
+	col_leds = []
+	col_occupied = []
 	for y in range(0, max_y) : 	
 		if y % 2 == 0 :
 			newhex = hexutil.Hex(x*2, y)
 		else :
 			newhex = hexutil.Hex((x*2)-1, y)
-		newhex.led = ledIndexFromOffsetCoordinates(x, y)
-		col[y] = newhex
-	grid[x] = col
+		newled = ledIndexFromOffsetCoordinates(x,y)
+		newoccupied = False
+
+		col_leds[y] = newled
+		col_occupied[y] = newoccupied
+		col_hexes[y] = newhex
+	grid[x] = col_hexes
+	ledNumbers[x] = col_leds
+	occupiedHexes[x] = col_occupied
+
+
+
 
 #TEST
 # pixels[grid[5][5].led] = (255, 0, 0)
