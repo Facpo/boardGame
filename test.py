@@ -94,7 +94,7 @@ def lightHexes(hexes, color) :
 		# print(ledIndexFromOffsetCoordinates(x, y))
 		# print(x)
 		# print(y)
-		pixels[ledIndexFromOffsetCoordinates(x, y)] = color
+		pixels[ledNumbers[x][y]] = color
 
 def generateLayout () :
 	#light up spawn region
@@ -110,13 +110,13 @@ def wipeBoard() :
 		pixels[i] = (0, 0, 0)
 
 # Master Grid that will holds all Hexes using offset coordinate system. I Rows, J Columns
-grid = []
-ledNumbers = []
-occupiedHexes = []
+grid = {}
+ledNumbers = {}
+occupiedHexes = {}
 for x in range(0, max_x) :
-	col_hexes = []
-	col_leds = []
-	col_occupied = []
+	col_hexes = {}
+	col_leds = {}
+	col_occupied = {}
 	for y in range(0, max_y) : 	
 		if y % 2 == 0 :
 			newhex = hexutil.Hex(x*2, y)
