@@ -88,6 +88,7 @@ def lightHexes(hexes, color) :
 
 	for hex in hexes :
 		x,y = offsetCoordinateFromDouble(hex)
+		print(hex)
 		print(x)
 		print(y)
 		print(ledNumbers[x][y])
