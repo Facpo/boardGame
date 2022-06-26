@@ -126,8 +126,9 @@ for x in range(0, max_x) :
 #     x,y = offsetCoordinateFromDouble(h)
 #     pixels[grid[x][y].led] =  (0, 255, 0)
 
+wipeBoard()
 while (True) :
 	if (not button.value) :
 		wipeBoard()
 		generateLayout()
-		time.sleep(1)
+		time.sleep(0.5)
