@@ -7,6 +7,7 @@ import time
 
 max_x = 11
 max_y = 12
+num_leds = 132
 
 pixels = neopixel.NeoPixel(board.D18, 132)
 
@@ -102,6 +103,10 @@ button = digitalio.DigitalInOut(board.D24)
 button.direction = digitalio.Direction.INPUT
 button.pull = digitalio.Pull.UP
 
+def wipeBoard() :
+	for i in range(num_leds):
+		pixels[i] = (0, 0, 0)
+
 # Master Grid that will holds all Hexes using offset coordinate system. I Rows, J Columns
 grid = {} 
 for x in range(0, max_x) :
@@ -123,5 +128,6 @@ for x in range(0, max_x) :
 
 while (True) :
 	if (not button.value) :
+		wipeBoard()
 		generateLayout()
 		time.sleep(1)
