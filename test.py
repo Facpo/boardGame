@@ -8,9 +8,9 @@ import time
 max_x = 11
 max_y = 12
 num_leds = 132
-brightness = 0.5
+brightnessVal = 0.5
 pixels = neopixel.NeoPixel(board.D18, 132)
-pixels.brightness(brightness)
+pixels.brightness(brightnessVal)
 enemySpawnDistance = 5
 minEnemyCount = 2
 maxEnemyCount = 5
