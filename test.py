@@ -97,7 +97,8 @@ def generateSpawnRegion () :
 	regionHexes.append(center)
 
 	for hex in regionHexes :
-		occupiedHexes[hex.x] [hex.y] = True
+		x,y = offsetCoordinateFromDouble(hex)
+		occupiedHexes[x] [y] = True
 
 	return regionHexes
 
