@@ -10,7 +10,7 @@ max_y = 12
 num_leds = 132
 brightnessVal = 0.5
 pixels = neopixel.NeoPixel(board.D18, 132)
-pixels.brightness(brightnessVal)
+pixels.brightness = brightnessVal
 enemySpawnDistance = 5
 minEnemyCount = 2
 maxEnemyCount = 5
