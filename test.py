@@ -122,7 +122,12 @@ button = digitalio.DigitalInOut(board.D24)
 button.direction = digitalio.Direction.INPUT
 button.pull = digitalio.Pull.UP
 
+#Full clear of lights and game state
 def wipeBoard() :
+	for x in range(max_x)
+		for y in range(max_y)
+			occupiedHexes[x][y] = False
+			
 	for i in range(num_leds):
 		pixels[i] = (0, 0, 0)
 
