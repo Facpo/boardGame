@@ -10,7 +10,8 @@ max_y = 12
 num_leds = 132
 pixels = neopixel.NeoPixel(board.D18, 132)
 enemySpawnDistance = 5
-maxEnemyCount = 3
+minEnemyCount = 2
+maxEnemyCount = 5
 
 #sets led index inside grid
 def ledIndexFromOffsetCoordinates(x, y) :
@@ -122,7 +123,7 @@ def spawnEnemy(center) :
 
 def spawnEnemies(center) :
 	enemies = []
-	numberOfEnemies = random.randrange(maxEnemyCount)
+	numberOfEnemies = random.randrange(minEnemyCount,maxEnemyCount + 1)
 	for i in range (numberOfEnemies) :
 		enemies.append(spawnEnemy(center)) 
 	return enemies
