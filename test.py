@@ -121,10 +121,11 @@ def spawnEnemy(center) :
 	return hex
 
 def spawnEnemies(center) :
+	enemies = {}
 	numberOfEnemies = random.randrange(maxEnemyCount)
 	for i in range (numberOfEnemies) :
-		spawnEnemy(center) 
-	
+		enemies.append(spawnEnemy(center)) 
+	return enemies
 
 def lightHexes(hexes, color) :
 
