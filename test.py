@@ -9,6 +9,8 @@ max_x = 11
 max_y = 12
 num_leds = 132
 pixels = neopixel.NeoPixel(board.D18, 132)
+enemySpawnDistance = 5
+maxEnemyCount = 3
 
 #sets led index inside grid
 def ledIndexFromOffsetCoordinates(x, y) :
@@ -74,9 +76,22 @@ def neighboursOnBoard(hex) :
 
 #chooses one of side hexes at random
 #returns it along with list of neighbours
-def generateSpawnRegion () :
+def generateSpawnRegion (center) :
+
+	regionHexes = []	
+	regionHexes = neighboursOnBoard(center)
+	regionHexes.append(center)
+
+	for hex in regionHexes :
+		x,y = offsetCoordinateFromDouble(hex)
+		occupiedHexes[x][y] = True
+
+	return regionHexes
+
+def generateSpawnRegionCenter ():
+
 	sideChoice = random.randrange(4)
-	regionHexes = []
+
 	if sideChoice == 0 :
 	#Top
 		center = doubleCoordinateFromOffset(random.randrange(max_x - 1),0)
@@ -93,29 +108,40 @@ def generateSpawnRegion () :
 	#Left 
 		center = doubleCoordinateFromOffset(0, random.randrange(max_y - 1))
 
-	regionHexes = neighboursOnBoard(center)
-	regionHexes.append(center)
+	return center
 
-	for hex in regionHexes :
-		x,y = offsetCoordinateFromDouble(hex)
-		occupiedHexes[x] [y] = True
 
-	return regionHexes
+def spawnEnemy(center) :
+
+	hex = grid[random.randrange(max_x)][random.randrange(max_y)]
+
+	while (hex.distance(center) <= enemySpawnDistance) :
+		hex = grid[random.randrange(max_x)][random.randrange(max_y)]
+
+	return hex
+
+def spawnEnemies(center) :
+	numberOfEnemies = random.randrange(maxEnemyCount)
+	for i in range (numberOfEnemies) :
+		spawnEnemy(center) 
+	
 
 def lightHexes(hexes, color) :
 
 	for hex in hexes :
 		x,y = offsetCoordinateFromDouble(hex)
-		print(hex)
-		print(x)
-		print(y)
-		print(ledNumbers[x][y])
+		# print(hex)
+		# print(x)
+		# print(y)
+		# print(ledNumbers[x][y])
 		pixels[ledNumbers[x][y]] = color
 
 def generateLayout () :
 
 	#light up spawn region
-	lightHexes(generateSpawnRegion(), (0, 255, 0))
+	center = generateSpawnRegionCenter()
+	lightHexes(generateSpawnRegion(center), (0, 255, 0))
+	lightHexes(spawnEnemies(center), (255, 0, 0))
 
 #setup button for starting map gen
 button = digitalio.DigitalInOut(board.D24)
@@ -168,5 +194,4 @@ while (True) :
 	if (not button.value) :
 		wipeBoard()
 		generateLayout()
-		print(occupiedHexes)
 		time.sleep(0.5)
