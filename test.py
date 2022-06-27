@@ -62,7 +62,7 @@ def isOnBoardOffset(x,y) :
 		return False
 		
 	return True
-	
+
 # Return existing neighbours 
 def neighboursOnBoard(hex) :
 	actualNeighbours = []
@@ -95,6 +95,10 @@ def generateSpawnRegion () :
 
 	regionHexes = neighboursOnBoard(center)
 	regionHexes.append(center)
+
+	for hex in regionHexes :
+		occupiedHexes[hex.x] [hex.y] = True
+
 	return regionHexes
 
 def lightHexes(hexes, color) :
@@ -108,6 +112,7 @@ def lightHexes(hexes, color) :
 		pixels[ledNumbers[x][y]] = color
 
 def generateLayout () :
+
 	#light up spawn region
 	lightHexes(generateSpawnRegion(), (0, 255, 0))
 
@@ -157,4 +162,5 @@ while (True) :
 	if (not button.value) :
 		wipeBoard()
 		generateLayout()
+		print(occupiedHexes)
 		time.sleep(0.5)
