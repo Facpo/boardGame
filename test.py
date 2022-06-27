@@ -121,7 +121,7 @@ def spawnEnemy(center) :
 	return hex
 
 def spawnEnemies(center) :
-	enemies = {}
+	enemies = []
 	numberOfEnemies = random.randrange(maxEnemyCount)
 	for i in range (numberOfEnemies) :
 		enemies.append(spawnEnemy(center)) 
